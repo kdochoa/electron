@@ -1,0 +1,29 @@
+From 3d47920f8a1fa026f2f52d8b8d29b1ce9a8b31b4 Mon Sep 17 00:00:00 2001
+From: kdochoa <36029800+kdochoa@users.noreply.github.com>
+Date: Fri, 30 Dec 2022 21:23:24 -0800
+Subject: removed legacy dfu uuid from gatt blocklist
+
+This is so we can access nordic legacy dfu service from web bluetooth
+
+diff --git a/content/browser/bluetooth/bluetooth_blocklist.cc b/content/browser/bluetooth/bluetooth_blocklist.cc
+index 8ec7c155d465a..c8cb51b4ddeef 100644
+--- a/content/browser/bluetooth/bluetooth_blocklist.cc
++++ b/content/browser/bluetooth/bluetooth_blocklist.cc
+@@ -139,7 +139,7 @@ void BluetoothBlocklist::PopulateWithDefaultValues() {
+   //
+   // Services:
+   Add(BluetoothUUID("1812"), Value::EXCLUDE);
+-  Add(BluetoothUUID("00001530-1212-efde-1523-785feabcd123"), Value::EXCLUDE);
++  // Add(BluetoothUUID("00001530-1212-efde-1523-785feabcd123"), Value::EXCLUDE);
+   Add(BluetoothUUID("f000ffc0-0451-4000-b000-000000000000"), Value::EXCLUDE);
+   Add(BluetoothUUID("00060000"), Value::EXCLUDE);
+   Add(BluetoothUUID("fff9"), Value::EXCLUDE);
+@@ -176,7 +176,7 @@ void BluetoothBlocklist::PopulateWithDefaultValues() {
+ }
+ 
+ void BluetoothBlocklist::PopulateWithServerProvidedValues() {
+-  Add(GetContentClient()->browser()->GetWebBluetoothBlocklist());
++  // Add(GetContentClient()->browser()->GetWebBluetoothBlocklist());
+ }
+ 
+ }  // namespace content
